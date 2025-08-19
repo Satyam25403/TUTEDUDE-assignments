@@ -1,0 +1,49 @@
+🗂️ 1. Creating and Renaming Files/Directories
+mkdir test_dir 
+cd test_dir 
+touch example.txt
+mv example.txt renamed_example.txt
+
+Creates test_dir, adds an empty file named example.txt, and then renames it to renamed_example.txt.
+
+
+📄 2. Viewing File Contents
+cat /etc/passwd 
+head -5 /etc/passwd 
+tail -5 /etc/passwd
+
+Displays full contents, first 5 lines, and last 5 lines of /etc/passwd.
+
+
+🔍 3. Searching for Patterns
+cat /etc/passwd | grep "root"
+
+passes output of cat command to grep=> to find occurences of  "root"
+
+
+📦 4. Zipping and Unzipping
+zip -r test_dir.zip test_dir
+unzip test_dir.zip -d unzipped_dir
+
+Compresses test_dir into a zip and extracts it into unzipped_dir.
+
+
+🌐 5. Downloading Files
+wget https://reqres.in/api/users?page=2
+
+Downloads a file from the specified URL using wget.
+
+
+🔐 6. Changing Permissions
+echo "This is a secure file" > secure.txt
+chmod 444 secure.txt
+
+Creates secure.txt and sets it to read-only for all users.
+
+
+🌱 7. Working with Environment Variables
+export MY_VAR="Hello, Linux!"
+printenv
+
+
+Sets an environment variable MY_VAR with the value "Hello, Linux!" and then print it.

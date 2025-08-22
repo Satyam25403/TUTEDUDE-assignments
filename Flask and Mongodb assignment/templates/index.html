@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Submission</title>
+</head>
+<body>
+    <h2>Submit Your Data</h2>
+    <form method="POST"  action="/success">
+        <label>Name:</label><br>
+        <input type="text" name="name" required><br><br>
+
+        <label>Email:</label><br>
+        <input type="email" name="email" required><br><br>
+
+        <label>Password:</label><br>
+        <input type="password" name="password" required placeholder="Enter your password..."><br><br>
+
+        <label>Confirm Password:</label><br>
+        <input type="password" name="cnfpassword" required placeholder="Confirm password..."><br><br>
+
+        <button type="submit" value="Submit">Submit</button>
+    </form>
+
+
+    {% if error %}
+        <p style="color:red;">Error occurred: {{ error }}</p>
+    {% endif %}
+</body>
+</html>

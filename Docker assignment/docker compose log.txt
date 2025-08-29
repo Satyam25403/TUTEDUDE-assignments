@@ -1,0 +1,44 @@
+PS D:\TUTEDUDE assignments\Docker assignment> docker compose up
+[+] Running 2/2r Desktop   o View Config   w Enable Watch
+ ✔ Container dockerassignment-backend-1   Created                                                            0.0s 
+ ✔ Container dockerassignment-frontend-1  Recreated                                                          0.1s 
+Attaching to backend-1, frontend-1
+backend-1   | Traceback (most recent call last):
+backend-1   |   File "/app/app.py", line 1, in <module>
+backend-1   |     from flask import Flask, request, jsonify                                                       
+backend-1   | ModuleNotFoundError: No module named 'flask'                                                        
+backend-1 exited with code 1
+frontend-1  | 
+frontend-1  | > frontend@1.0.0 start
+frontend-1  | > node app.js                                                                                       
+frontend-1  | 
+frontend-1  | [dotenv@17.2.1] injecting env (0) from .env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+frontend-1  | Frontend running on http://localhost:3000
+Gracefully stopping... (press Ctrl+C again to force)                                                              
+[+] Stopping 2/1
+ ✔ Container dockerassignment-frontend-1  Stopped                                                            1.0s 
+ ✔ Container dockerassignment-backend-1   Stopped                                                            0.0s 
+canceled
+PS D:\TUTEDUDE assignments\Docker assignment> docker compose up
+[+] Running 2/2
+ ✔ Container dockerassignment-frontend-1  Created                                                            0.0s 
+ ✔ Container dockerassignment-backend-1   Recreated                                                          0.1s 
+Attaching to backend-1, frontend-1
+backend-1   |  * Serving Flask app 'app'
+backend-1   |  * Debug mode: off
+backend-1   | WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.                                                                                                
+backend-1   |  * Running on all addresses (0.0.0.0)
+backend-1   |  * Running on http://127.0.0.1:5000                                                                 
+backend-1   |  * Running on http://172.22.0.2:5000                                                                
+backend-1   | Press CTRL+C to quit                                                                                
+frontend-1  | 
+frontend-1  | > frontend@1.0.0 start
+frontend-1  | > node app.js                                                                                       
+frontend-1  |                                                                                                     
+frontend-1  | [dotenv@17.2.1] injecting env (0) from .env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+frontend-1  | Frontend running on http://localhost:3000
+backend-1   | 172.22.0.3 - - [29/Aug/2025 16:36:54] "POST /submit HTTP/1.1" 200 -
+Gracefully stopping... (press Ctrl+C again to force)
+[+] Stopping 2/2
+ ✔ Container dockerassignment-frontend-1  Stopped                                                            0.9s 
+ ✔ Container dockerassignment-backend-1   Stopped   

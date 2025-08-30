@@ -1,0 +1,57 @@
+PS D:\TUTEDUDE assignments\Kubernetes assignment> kubectl apply -f deployments.yaml
+deployment.apps/backend created
+deployment.apps/frontend created
+PS D:\TUTEDUDE assignments\Kubernetes assignment> kubectl apply -f services.yaml   
+service/backend created
+service/frontend created
+
+PS D:\TUTEDUDE assignments\Kubernetes assignment> kubectl get all 
+NAME                            READY   STATUS    RESTARTS   AGE
+pod/backend-7956b9f589-fwml7    1/1     Running   0          2m39s
+pod/frontend-7dcdf646c6-sxnp7   1/1     Running   0          2m39s
+
+NAME                 TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+service/backend      ClusterIP   10.96.50.58     <none>        5000/TCP         2m28s
+service/frontend     NodePort    10.108.109.99   <none>        3000:31469/TCP   2m28s
+service/kubernetes   ClusterIP   10.96.0.1       <none>        443/TCP          23m
+
+NAME                       READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/backend    1/1     1            1           2m39s
+deployment.apps/frontend   1/1     1            1           2m39s
+
+NAME                                  DESIRED   CURRENT   READY   AGE
+replicaset.apps/backend-7956b9f589    1         1         1       2m39s
+replicaset.apps/frontend-7dcdf646c6   1         1         1       2m39s
+PS D:\TUTEDUDE assignments\Kubernetes assignment> 
+
+
+==============================CLEANUPS==================================
+PS D:\TUTEDUDE assignments\Kubernetes assignment> kubectl delete all --all
+pod "backend-7956b9f589-fwml7" deleted
+pod "frontend-7dcdf646c6-sxnp7" deleted
+service "backend" deleted
+service "frontend" deleted
+service "kubernetes" deleted
+deployment.apps "backend" deleted
+deployment.apps "frontend" deleted
+PS D:\TUTEDUDE assignments\Kubernetes assignment> kubectl get all
+NAME                            READY   STATUS        RESTARTS   AGE
+pod/backend-7956b9f589-fwml7    1/1     Terminating   0          9m36s
+pod/backend-7956b9f589-hfthr    1/1     Terminating   0          22s
+pod/frontend-7dcdf646c6-p2xt6   1/1     Terminating   0          22s
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   12s
+PS D:\TUTEDUDE assignments\Kubernetes assignment> kubectl get all
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   60s
+
+PS D:\TUTEDUDE assignments\Kubernetes assignment> minikube stop
+✋  Stopping node "minikube"  ...
+🛑  Powering off "minikube" via SSH ...
+🛑  1 node stopped.
+PS D:\TUTEDUDE assignments\Kubernetes assignment> minikube delete
+🔥  Deleting "minikube" in docker ...
+🔥  Deleting container "minikube" ...
+🔥  Removing C:\Users\priya\.minikube\machines\minikube ...
+💀  Removed all traces of the "minikube" cluster.

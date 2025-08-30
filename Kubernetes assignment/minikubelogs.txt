@@ -1,0 +1,49 @@
+PS D:\TUTEDUDE assignments\Kubernetes assignment> minikube start
+😄  minikube v1.36.0 on Microsoft Windows 11 Home Single Language 10.0.26100.5074 Build 26100.5074
+E0831 01:20:50.685188   21112 start.go:819] api.Load failed for minikube: filestore "minikube": Docker machine "minikube" does not exist. Use "docker-machine ls" to list machines. Use "docker-machine create" to add a new one.
+✨  Using the docker driver based on existing profile
+👍  Starting "minikube" primary control-plane node in "minikube" cluster
+🚜  Pulling base image v0.0.47 ...
+🔥  Creating docker container (CPUs=2, Memory=2200MB) ...
+🐳  Preparing Kubernetes v1.33.1 on Docker 28.1.1 ...
+❗  Failing to connect to https://registry.k8s.io/ from both inside the minikube container and host machine
+💡  To pull new external images, you may need to configure a proxy: https://minikube.sigs.k8s.io/docs/reference/networking/proxy/
+    ▪ Generating certificates and keys ...
+💡  To pull new external images, you may need to configure a proxy: https://minikube.sigs.k8s.io/docs/reference/networking/proxy/
+    ▪ Generating certificates and keys ...
+    ▪ Booting up control plane ...
+class, storage-provisioner
+🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
+PS D:\TUTEDUDE assignments\Kubernetes class, storage-provisioner
+🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
+PS D:\TUTEDUDE assignments\Kubernetes assignment> minikube dashboard        
+🔌  Enabling dashboard ...
+    ▪ Using image docker.io/kubernetesui/dashboard:v2.7.0
+    ▪ Using image docker.io/kubernetesui/metrics-scraper:v1.0.8
+💡  Some dashboard features require the metrics-server addon. To enable all features please run:
+
+        minikube addons enable metrics-server
+
+🤔  Verifying dashboard health ...    
+🚀  Launching proxy ...
+🤔  Verifying proxy health ...        
+🎉  Opening http://127.0.0.1:51200/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/ in your default browser...
+
+
+
+===================================AFTER DEPLOYMENT=================================
+
+PS D:\TUTEDUDE assignments\Kubernetes assignment> minikube service frontend
+|-----------|----------|-------------|---------------------------|
+| NAMESPACE |   NAME   | TARGET PORT |            URL            |
+|-----------|----------|-------------|---------------------------|
+| default   | frontend |        3000 | http://192.168.49.2:31469 |
+|-----------|----------|-------------|---------------------------|
+🏃  Starting tunnel for service frontend.
+|-----------|----------|-------------|------------------------|
+| NAMESPACE |   NAME   | TARGET PORT |          URL           |
+|-----------|----------|-------------|------------------------|
+| default   | frontend |             | http://127.0.0.1:12567 |
+|-----------|----------|-------------|------------------------|
+🎉  Opening service default/frontend in default browser...
+❗  Because you are using a Docker driver on windows, the terminal needs to be open to run it.

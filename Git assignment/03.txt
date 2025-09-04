@@ -1,0 +1,136 @@
+
+CREATING BRANCHES:
+PS C:\Users\priya\github_tutedude> git status       
+On branch main
+Your branch is up to date with 'origin/main'.       
+
+nothing to commit, working tree clean
+PS C:\Users\priya\github_tutedude> git checkout -b master_1
+Switched to a new branch 'master_1'
+PS C:\Users\priya\github_tutedude> git checkout main
+
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+PS C:\Users\priya\github_tutedude> git checkout -b master_2
+Switched to a new branch 'master_2'
+PS C:\Users\priya\github_tutedude> 
+
+
+ON BRANCH MASTER_1 CREATING FRONTEND AND PUSHING IT:
+PS C:\Users\priya\github_tutedude> git checkout master_1
+Switched to branch 'master_1'
+PS C:\Users\priya\github_tutedude> git add .
+PS C:\Users\priya\github_tutedude> git commit -m "Add To-Do form page with Item Name and Description"
+[master_1 45f2c73] Add To-Do form page with Item Name and Description
+ 2 files changed, 26 insertions(+)
+ create mode 100644 frontend/app.py
+ create mode 100644 frontend/templates/todo.html
+PS C:\Users\priya\github_tutedude> git push -u origin master_1
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (6/6), 776 bytes | 776.00 KiB/s, done.
+Total 6 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+remote:
+remote: Create a pull request for 'master_1' on GitHub by visiting:
+remote:      https://github.com/Satyam25403/github_tutedude/pull/new/master_1
+remote:
+To https://github.com/Satyam25403/github_tutedude.git
+ * [new branch]      master_1 -> master_1
+branch 'master_1' set up to track 'origin/master_1'.
+PS C:\Users\priya\github_tutedude> 
+
+
+
+BACKEND FUNCTIONALITY ON MASTER_2:
+PS C:\Users\priya\github_tutedude> git checkout master_2
+Switched to branch 'master_2'
+PS C:\Users\priya\github_tutedude> git add .
+PS C:\Users\priya\github_tutedude> git commit -m "Add /submittodoitem POST route with MongoDB integration"
+[master_2 1c8fc17] Add /submittodoitem POST route with MongoDB integration
+ 2 files changed, 28 insertions(+)
+ create mode 100644 frontend/app.py
+ create mode 100644 frontend/requirements.txt       
+PS C:\Users\priya\github_tutedude> git push -u origin master_2
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 699 bytes | 699.00 KiB/s, done.
+Total 4 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+remote:
+remote: Create a pull request for 'master_2' on GitHub by visiting:
+remote:      https://github.com/Satyam25403/github_tutedude/pull/new/master_2
+remote:
+To https://github.com/Satyam25403/github_tutedude.git
+ * [new branch]      master_2 -> master_2
+branch 'master_2' set up to track 'origin/master_2'.
+PS C:\Users\priya\github_tutedude> 
+
+
+
+SWITCH TO MAIN:
+PS C:\Users\priya\github_tutedude> git checkout main
+Updating 92c4fce..45f2c73
+Fast-forward
+ frontend/app.py              |  7 +++++++
+ frontend/templates/todo.html | 19 +++++++++++++++++++
+ 2 files changed, 26 insertions(+)
+Updating 92c4fce..45f2c73
+Fast-forward
+ frontend/app.py              |  7 +++++++
+ frontend/templates/todo.html | 19 +++++++++++++++++++
+ 2 files changed, 26 insertions(+)
+ create mode 100644 frontend/app.py
+ create mode 100644 frontend/templates/todo.html
+
+MERGE MASTER_1 TO MAIN:
+PS C:\Users\priya\github_tutedude> git merge master_1
+Updating 92c4fce..45f2c73
+Fast-forward
+ frontend/app.py              |  7 +++++++
+ frontend/templates/todo.html | 19 +++++++++++++++++++
+ 2 files changed, 26 insertions(+)
+ create mode 100644 frontend/app.py
+Fast-forward
+ frontend/app.py              |  7 +++++++
+ frontend/templates/todo.html | 19 +++++++++++++++++++
+ 2 files changed, 26 insertions(+)
+ frontend/app.py              |  7 +++++++
+ frontend/templates/todo.html | 19 +++++++++++++++++++
+ 2 files changed, 26 insertions(+)
+ frontend/templates/todo.html | 19 +++++++++++++++++++
+ 2 files changed, 26 insertions(+)
+ 2 files changed, 26 insertions(+)
+ create mode 100644 frontend/app.py
+ create mode 100644 frontend/templates/todo.html
+
+RESOLVE CONFLICTS WHILE MERGING MASTER_2 TO MAIN:
+PS C:\Users\priya\github_tutedude> git merge master_2
+Auto-merging frontend/app.py
+CONFLICT (add/add): Merge conflict in frontend/app.py
+CONFLICT (add/add): Merge conflict in frontend/app.py
+Automatic merge failed; fix conflicts and then commit the result.
+PS C:\Users\priya\github_tutedude> git commit -m "Resolve merge conflict in app.py"
+error: Committing is not possible because you have unmerged files.
+hint: Fix them up in the work tree, and then use 'git add/rm <file>'
+hint: as appropriate to mark resolution and make a commit.
+fatal: Exiting because of an unresolved conflict.
+U       frontend/app.py
+PS C:\Users\priya\github_tutedude> git add frontend/app.py
+PS C:\Users\priya\github_tutedude> git commit -m "Resolve merge conflict in app.py"
+[main 9241923] Resolve merge conflict in app.py
+PS C:\Users\priya\github_tutedude> git push origin main
+Enumerating objects: 10, done.
+Counting objects: 100% (10/10), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 548 bytes | 548.00 KiB/s, done.
+Total 4 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To https://github.com/Satyam25403/github_tutedude.git
+   92c4fce..9241923  main -> main
+PS C:\Users\priya\github_tutedude>

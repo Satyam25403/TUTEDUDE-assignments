@@ -1,0 +1,113 @@
+
+PS C:\Users\priya\github_tutedude> git checkout master_1
+Switched to branch 'master_1'
+Your branch is up to date with 'origin/master_1'.
+
+
+ADDING ID:
+PS C:\Users\priya\github_tutedude> git add .
+PS C:\Users\priya\github_tutedude> git status
+On branch master_1
+Your branch is up to date with 'origin/master_1'.
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   frontend/templates/todo.html
+PS C:\Users\priya\github_tutedude> git commit -m "Add Item ID field to To-Do form"
+[master_1 e29745d] Add Item ID field to To-Do form
+ 1 file changed, 4 insertions(+)
+
+ADDING UUID:
+PS C:\Users\priya\github_tutedude> git add .        
+PS C:\Users\priya\github_tutedude> git commit -m "Add Item UUID field to To-Do form"
+[master_1 84e7ed7] Add Item UUID field to To-Do form
+ 1 file changed, 3 insertions(+)
+
+ADDING HASH:
+PS C:\Users\priya\github_tutedude> git add .        
+PS C:\Users\priya\github_tutedude> git commit -m "Add Item Hash field to To-Do form"
+[master_1 7b263df] Add Item Hash field to To-Do form
+ 1 file changed, 3 insertions(+)
+
+
+PUSHING EVERYTHING TO REPO:
+PS C:\Users\priya\github_tutedude> git push origin master_1
+Enumerating objects: 19, done.
+Counting objects: 100% (19/19), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (12/12), done.
+Writing objects: 100% (15/15), 1.24 KiB | 635.00 KiB/s, done.
+Total 15 (delta 6), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (6/6), completed with 2 local objects.
+To https://github.com/Satyam25403/github_tutedude.git
+   45f2c73..7b263df  master_1 -> master_1
+PS C:\Users\priya\github_tutedude> 
+
+
+
+NO TRACES OF EACH FIELD COMMITS=>since we didn't pushed to main on each commit=>so we do the process on master_1 branch
+ git log --oneline
+
+9241923 (HEAD -> main, origin/main) Resolve merge conflict in app.py
+1c8fc17 (origin/master_2, master_2) Add /submittodoitem POST route with MongoDB integration
+45f2c73 Add To-Do form page with Item Name and Description
+92c4fce (satyam_new) changed data.json
+84f3ba3 (satyam) initial commit
+befa9bd Initial commit
+PS C:\Users\priya\github_tutedude> 
+
+
+PICK THE COMMIT HASH FROM MASTER_1:
+7b263df (HEAD -> master_1, origin/master_1) Add Item Hash field to To-Do form
+84e7ed7 Add Item UUID field to To-Do form
+e29745d Add Item ID field to To-Do form
+45f2c73 Add To-Do form page with Item Name and Description
+92c4fce (satyam_new) changed data.json
+84f3ba3 (satyam) initial commit
+befa9bd Initial commit
+PS C:\Users\priya\github_tutedude> git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+
+
+ON MAIN CHERRYPICK THAT COMMIT:
+PS C:\Users\priya\github_tutedude> git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+PS C:\Users\priya\github_tutedude> git cherry-pick e29745d
+[main ef489c6] Add Item ID field to To-Do form
+ Date: Thu Sep 4 16:36:22 2025 +0530
+ 1 file changed, 4 insertions(+)
+
+
+
+
+SINCE HISTORY ON MAIN DONT CONTAIN THOSE 3 COMMITS, WE CANT RESET AS STATED......BUT COMMANDS<PROOF OF CONCEPT>:
+
+git log --oneline
+git reset --soft <ItemID-commit-hash>
+git reset  
+git add .
+git commit -m "Restore to Item ID field only"
+git push --force origin main
+
+
+REBASING THE UPDATED CHANGED IN MAIN BRANCH TO MASTER_1 BRANCH:
+PS C:\Users\priya\github_tutedude> git checkout master_1
+Switched to branch 'master_1'
+Your branch is up to date with 'origin/master_1'.
+PS C:\Users\priya\github_tutedude> git rebase main
+warning: skipped previously applied commit e29745d
+hint: use --reapply-cherry-picks to include skipped commits
+hint: Disable this message with "git config advice.skippedCherryPicks false"
+Successfully rebased and updated refs/heads/master_1.
+PS C:\Users\priya\github_tutedude> git push --force origin master_1
+Enumerating objects: 19, done.
+Counting objects: 100% (19/19), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (12/12), done.
+Writing objects: 100% (15/15), 1.18 KiB | 604.00 KiB/s, done.
+Total 15 (delta 9), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (9/9), completed with 3 local objects.
+To https://github.com/Satyam25403/github_tutedude.git
+ + 7b263df...e15c3d7 master_1 -> master_1 (forced update)
+PS C:\Users\priya\github_tutedude> 

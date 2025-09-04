@@ -1,0 +1,98 @@
+CREATING SSH KEY AND ADDING TO GITHUB REPO:
+PS C:\Users\priya> ssh-keygen -t ed25519 -C "satyamdk6927@gmail.com"
+Generating public/private ed25519 key pair.
+Enter file in which to save the key (C:\Users\priya/.ssh/id_ed25519): 
+C:\Users\priya/.ssh/id_ed25519 already exists.
+Overwrite (y/n)? 
+
+PS C:\WINDOWS\system32> Set-Service -Name ssh-agent -StartupType Automatic
+PS C:\WINDOWS\system32> Start-Service ssh-agent
+PS C:\WINDOWS\system32> ssh-add ~/.ssh/id_ed25519
+~/.ssh/id_ed25519: No such file or directory
+PS C:\WINDOWS\system32> ssh-add C:/Users/priya/.ssh/id_ed25519
+Identity added: C:/Users/priya/.ssh/id_ed25519 (satyamdk6927@gmail.com)
+PS C:\WINDOWS\system32> cat C:/Users/priya/.ssh/id_ed25519.pub
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPjFEsD0Gg0bAactdzSqVQBP8+OzMWeMXAHDHgcAeiAL satyamdk6927@gmail.com
+PS C:\WINDOWS\system32>
+
+SSH CHECK:
+PS C:\Users\priya> ssh -T git@github.com
+Hi Satyam25403/github_tutedude! You've successfully authenticated, but GitHub does not provide shell access.
+PS C:\Users\priya>
+
+
+CLONING THE REPO:
+PS C:\Users\priya\github_tutedude> git clone https://github.com/Satyam25403/github_tutedude.git
+Cloning into 'github_tutedude'...
+warning: You appear to have cloned an empty repository.
+
+
+CREATING AN INITIAL COMMIT:
+PS C:\Users\priya\github_tutedude> echo "# Flask Project" > README.md
+PS C:\Users\priya\github_tutedude> git add README.md
+PS C:\Users\priya\github_tutedude> git commit -m "Initial commit"
+[main (root-commit) befa9bd] Initial commit
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 README.md
+
+
+CREATING NEW BRANCH:
+PS C:\Users\priya\github_tutedude> git branch satyam
+PS C:\Users\priya\github_tutedude> git checkout satyam
+Switched to branch 'satyam'
+
+ADDING FLASK PROJECT FILES:
+PS C:\Users\priya\github_tutedude> git add .
+PS C:\Users\priya\github_tutedude> git status
+On branch satyam
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   .gitignore
+        new file:   Screenshot 2025-08-22 083625.png
+        new file:   Screenshot 2025-08-22 083653.png
+        new file:   Screenshot 2025-08-22 084229.png
+        new file:   app.py
+        new file:   data.json
+        new file:   requirements.txt
+        new file:   templates/index.html
+        new file:   templates/success.html
+PS C:\Users\priya\github_tutedude> git commit -m "initial commit"
+[satyam 84f3ba3] initial commit
+ 9 files changed, 99 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 Screenshot 2025-08-22 083625.png
+ create mode 100644 Screenshot 2025-08-22 083653.png
+ create mode 100644 Screenshot 2025-08-22 084229.png
+ create mode 100644 app.py
+ create mode 100644 data.json
+ create mode 100644 requirements.txt
+ create mode 100644 templates/index.html
+ create mode 100644 templates/success.html
+
+MERGING SATYAM TO MAIN:
+PS C:\Users\priya\github_tutedude> git checkout main
+Switched to branch 'main'
+Your branch is based on 'origin/main', but the upstream is gone.
+  (use "git branch --unset-upstream" to fixup)      
+PS C:\Users\priya\github_tutedude> git merge satyam
+Updating befa9bd..84f3ba3
+Fast-forward
+ .gitignore                       |   1 +
+ Screenshot 2025-08-22 083625.png | Bin 0 -> 244644 bytes
+ Screenshot 2025-08-22 083653.png | Bin 0 -> 42582 bytes
+ Screenshot 2025-08-22 084229.png | Bin 0 -> 30052 bytes
+ app.py                           |  48 +++++++++++++++++++++++++++++++++++++++
+ data.json                        |   7 ++++++      
+ requirements.txt                 |   4 ++++        
+ templates/index.html             |  29 +++++++++++++++++++++++
+ templates/success.html           |  10 ++++++++    
+ 9 files changed, 99 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 Screenshot 2025-08-22 083625.png
+ create mode 100644 Screenshot 2025-08-22 083653.png
+ create mode 100644 Screenshot 2025-08-22 084229.png
+ create mode 100644 app.py
+ create mode 100644 data.json
+ create mode 100644 requirements.txt
+ create mode 100644 templates/index.html
+ create mode 100644 templates/success.html

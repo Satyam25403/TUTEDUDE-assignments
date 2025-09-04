@@ -1,0 +1,52 @@
+
+CREATING NEW BRANCH:
+PS C:\Users\priya\github_tutedude> git branch satyam_new
+PS C:\Users\priya\github_tutedude> git checkout satyam_new
+Switched to branch 'satyam_new'
+M       data.json
+
+CHANGING JSON DATA:
+PS C:\Users\priya\github_tutedude> git add .
+PS C:\Users\priya\github_tutedude> git commit -m "changed data.json"
+[satyam_new 92c4fce] changed data.json
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+MERGING INTO MAIN:
+PS C:\Users\priya\github_tutedude> git checkout main
+Switched to branch 'main'
+Your branch is based on 'origin/main', but the upstream is gone.
+  (use "git branch --unset-upstream" to fixup)      
+PS C:\Users\priya\github_tutedude> git push -u origin main
+Enumerating objects: 15, done.
+Counting objects: 100% (15/15), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (11/11), done.
+Writing objects: 100% (15/15), 293.58 KiB | 15.45 MiWriting objects: 100% (15/15), 293.58 KiB | 15.45 MiB/s, done.
+Total 15 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/Satyam25403/github_tutedude.git
+ * [new branch]      main -> main
+branch 'main' set up to track 'origin/main'.        
+PS C:\Users\priya\github_tutedude>
+PS C:\Users\priya\github_tutedude> git merge satyam_new
+Updating 84f3ba3..92c4fce
+Fast-forward
+ data.json | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)    
+PS C:\Users\priya\github_tutedude> git status
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+nothing to commit, working tree clean
+
+PUSHING ALL:
+PS C:\Users\priya\github_tutedude> git push origin main
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 342 bytes | 342.00 KiB/s, done.
+Total 3 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To https://github.com/Satyam25403/github_tutedude.git
+   84f3ba3..92c4fce  main -> main
+PS C:\Users\priya\github_tutedude> 

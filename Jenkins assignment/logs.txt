@@ -142,16 +142,68 @@ Sep 19 14:03:35 ip-172-31-33-208 jenkins[10359]: 2025-09-19 14:03:35.404+0000 [i
 ubuntu@ip-172-31-33-208:~/github_tutedude$  sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 8f092ba7ad8d47578df97dcaa8fd3310
 
+sudo chown -R ubuntu:ubuntu /var/lib/jenkins/deploy_logs
+
 ======================================================
 
 #!/bin/bash
 set -e
 lsof -t -i:3000 | xargs -r kill -9 || true
 lsof -t -i:5000 | xargs -r kill -9 || true
-rm -rf Assignment9 || true
-git clone https://github.com/Satyam25403/github_tutedude
-cd github_tutedude
-npm i frontend/
-pip3 install -r backend/requirements.txt --break-system-packages
-nohup python3 backend/app.py > flask.log 2>&1 &
-nohup node frontend/app.js > express.log 2>&1 &
+
+WORKDIR="/var/lib/jenkins/workspace/satyam/github_tutedude"
+rm -rf "$WORKDIR" || true
+git clone https://github.com/Satyam25403/github_tutedude "$WORKDIR"
+cd "$WORKDIR"
+cd frontend
+npm install
+cd ../backend
+pip3 install -r requirements.txt --break-system-packages
+cd ../
+nohup python3 backend/app.py > /dev/null 2>&1 &
+nohup node frontend/app.js > /dev/null 2>&1 &
+
+=====================================================================================
+
+PS D:\TUTEDUDE assignments\github_tutedude> git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   backend/app.py
+        modified:   backend/data.json
+        modified:   frontend/public/style.css
+
+no changes added to commit (use "git add" and/or "git commit -a")
+PS D:\TUTEDUDE assignments\github_tutedude> git add .
+PS D:\TUTEDUDE assignments\github_tutedude> git commit "some changes made to test ci/cd"
+error: pathspec 'some changes made to test ci/cd' did not match any file(s) known to git
+PS D:\TUTEDUDE assignments\github_tutedude> git commit -m "some changes made to test ci/cd" 
+[main 7a8680b] some changes made to test ci/cd
+ 3 files changed, 3 insertions(+), 2 deletions(-)
+PS D:\TUTEDUDE assignments\github_tutedude> git push
+Enumerating objects: 15, done.
+Counting objects: 100% (15/15), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (7/7), done.
+Writing objects: 100% (8/8), 683 bytes | 227.00 KiB/s, done.
+Total 8 (delta 4), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (4/4), completed with 4 local objects.
+To https://github.com/Satyam25403/github_tutedude
+   75c485d..7a8680b  main -> main
+
+
+================================================
+
+Proof of changes getting reflected to server:
+ubuntu@ip-172-31-33-208:/var/lib/jenkins/workspace/satyam$ cat github_tutedude/backend/data.json
+[
+    {"id": 0, "name":"Tutedude"},
+    {"id": 1, "name": "sagar"},
+    {"id": 2, "name": "satyam"},
+    {"id": 3, "name": "yaswanth"},
+    {"id": 4, "name": "noob"},
+    {"id": 5, "name": "lucky"}
+]ubuntu@ip-172-31-33-208:/var/lib/jenkins/workspace/satyam$ ^C

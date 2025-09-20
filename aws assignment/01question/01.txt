@@ -1,0 +1,25 @@
+ubuntu@ip-172-31-33-208:~$ git clone https://github.com/Satyam25403/github_tutedude
+Cloning into 'github_tutedude'...
+remote: Enumerating objects: 77, done.
+remote: Counting objects: 100% (77/77), done.
+remote: Compressing objects: 100% (46/46), done.
+remote: Total 77 (delta 23), reused 72 (delta 18), pack-reused 0 (from 0)
+Receiving objects: 100% (77/77), 309.73 KiB | 14.75 MiB/s, done.
+Resolving deltas: 100% (23/23), done.
+ubuntu@ip-172-31-33-208:~$ cd github_tutedude
+
+
+
+
+cd frontend
+npm install
+cd ../backend
+pip3 install -r requirements.txt --break-system-packages
+cd ../
+nohup python3 backend/app.py > /dev/null 2>&1 &
+nohup node frontend/app.js > /dev/null 2>&1 &
+
+
+//cleanup
+lsof -t -i:3000 | xargs -r kill -9 || true
+lsof -t -i:5000 | xargs -r kill -9 || true

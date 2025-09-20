@@ -1,0 +1,92 @@
+C:\Users\priya>aws sts get-caller-identity
+{
+    "UserId": "AIDATQQAPZMNJXRSXNUXF",
+    "Account": "241592945434",
+    "Arn": "arn:aws:iam::241592945434:user/satyam"
+}
+
+
+C:\Users\priya>aws ecr create-repository --repository-name flask-backend
+{
+    "repository": {
+        "repositoryArn": "arn:aws:ecr:eu-north-1:241592945434:repository/flask-backend",
+        "registryId": "241592945434",
+        "repositoryName": "flask-backend",
+        "repositoryUri": "241592945434.dkr.ecr.eu-north-1.amazonaws.com/flask-backend",
+        "createdAt": "2025-09-19T23:48:24.955000+05:30",
+        "imageTagMutability": "MUTABLE",
+        "imageScanningConfiguration": {
+            "scanOnPush": false
+        },
+        "encryptionConfiguration": {
+            "encryptionType": "AES256"
+        }
+    }
+}
+
+
+C:\Users\priya>aws ecr create-repository --repository-name express-frontend
+{
+    "repository": {
+        "repositoryArn": "arn:aws:ecr:eu-north-1:241592945434:repository/express-frontend",
+        "registryId": "241592945434",
+        "repositoryName": "express-frontend",
+        "repositoryUri": "241592945434.dkr.ecr.eu-north-1.amazonaws.com/express-frontend",
+        "createdAt": "2025-09-19T23:48:46.234000+05:30",
+        "imageTagMutability": "MUTABLE",
+        "imageScanningConfiguration": {
+            "scanOnPush": false
+        },
+        "encryptionConfiguration": {
+            "encryptionType": "AES256"
+        }
+    }
+}
+
+
+C:\Users\priya>aws ecr get-login-password | docker login --username AWS --password-stdin 241592945434.dkr.ecr.eu-north-1.amazonaws.com
+Login Succeeded
+
+
+
+
+C:\Users\priya>docker tag github_tutedude-frontend:latest 241592945434.dkr.ecr.eu-north-1.amazonaws.com/express-frontend
+C:\Users\priya>docker tag github_tutedude-backend:latest 241592945434.dkr.ecr.eu-north-1.amazonaws.com/flask-backend
+
+
+
+
+C:\Users\priya>docker push 241592945434.dkr.ecr.eu-north-1.amazonaws.com/express-frontend
+Using default tag: latest
+The push refers to repository [241592945434.dkr.ecr.eu-north-1.amazonaws.com/express-frontend]
+a034238aa3ff: Pushed
+6c665f39a077: Pushed
+35942d27dda1: Pushed
+d2a991bcab4d: Pushed
+b624aa2d5ea2: Pushed
+d399c9dc306f: Pushed
+84f9fa179c1b: Pushed
+ce84ba212e49: Pushed
+e4dc8cd9ecc8: Pushed
+6428cc293366: Pushed
+2f7436e79a0b: Pushed
+latest: digest: sha256:03697ea8c6f429fe316b19aede95e25b0b586ddf4a37b1e5554ccd7c14b576af size: 2630
+
+
+C:\Users\priya>docker push 241592945434.dkr.ecr.eu-north-1.amazonaws.com/flask-backend
+Using default tag: latest
+The push refers to repository [241592945434.dkr.ecr.eu-north-1.amazonaws.com/flask-backend]
+f87bd90c6f2b: Pushed
+efd83d91a6de: Pushed
+77bf89497b14: Pushed
+4a98ed193d97: Pushed
+02768a08719a: Pushed
+70cd8e0b141e: Pushed
+08e14ec5b749: Pushed
+0dd5860cbc60: Pushed
+607ddfe5f3c3: Pushed
+185e04da9d94: Pushed
+latest: digest: sha256:ea2927a34d4ecf8de93cd7f7ce539b16022d42be1a91f0261c59683ac65cf0ba size: 2420
+
+
+

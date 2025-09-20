@@ -6,6 +6,7 @@ C:\Users\priya>aws sts get-caller-identity
 }
 
 
+
 C:\Users\priya>aws ecr create-repository --repository-name flask-backend
 {
     "repository": {
@@ -44,19 +45,18 @@ C:\Users\priya>aws ecr create-repository --repository-name express-frontend
 }
 
 
+
+//pushing images from local
 C:\Users\priya>aws ecr get-login-password | docker login --username AWS --password-stdin 241592945434.dkr.ecr.eu-north-1.amazonaws.com
 Login Succeeded
 
+docker build -t express-frontend .
+docker build -t flask-backend .
 
+C:\Users\priya>docker tag express-frontend:latest 241592945434.dkr.ecr.eu-north-1.amazonaws.com/express-frontend:latest
+C:\Users\priya>docker tag flask-backend:latest 241592945434.dkr.ecr.eu-north-1.amazonaws.com/flask-backend:latest
 
-
-C:\Users\priya>docker tag github_tutedude-frontend:latest 241592945434.dkr.ecr.eu-north-1.amazonaws.com/express-frontend
-C:\Users\priya>docker tag github_tutedude-backend:latest 241592945434.dkr.ecr.eu-north-1.amazonaws.com/flask-backend
-
-
-
-
-C:\Users\priya>docker push 241592945434.dkr.ecr.eu-north-1.amazonaws.com/express-frontend
+C:\Users\priya>docker push 241592945434.dkr.ecr.eu-north-1.amazonaws.com/express-frontend:latest
 Using default tag: latest
 The push refers to repository [241592945434.dkr.ecr.eu-north-1.amazonaws.com/express-frontend]
 a034238aa3ff: Pushed
@@ -73,7 +73,7 @@ e4dc8cd9ecc8: Pushed
 latest: digest: sha256:03697ea8c6f429fe316b19aede95e25b0b586ddf4a37b1e5554ccd7c14b576af size: 2630
 
 
-C:\Users\priya>docker push 241592945434.dkr.ecr.eu-north-1.amazonaws.com/flask-backend
+C:\Users\priya>docker push 241592945434.dkr.ecr.eu-north-1.amazonaws.com/flask-backend:latest
 Using default tag: latest
 The push refers to repository [241592945434.dkr.ecr.eu-north-1.amazonaws.com/flask-backend]
 f87bd90c6f2b: Pushed
@@ -88,5 +88,25 @@ efd83d91a6de: Pushed
 185e04da9d94: Pushed
 latest: digest: sha256:ea2927a34d4ecf8de93cd7f7ce539b16022d42be1a91f0261c59683ac65cf0ba size: 2420
 
+
+
+
+//running images on instance
+installing awscliv2 on ubuntu ec2 instance:
+sudo apt update
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+sudo apt install unzip
+unzip awscliv2.zip
+sudo ./aws/install
+aws --version
+
+
+aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 241592945434.dkr.ecr.eu-north-1.amazonaws.com
+
+docker pull 241592945434.dkr.ecr.eu-north-1.amazonaws.com/express-frontend
+docker pull 241592945434.dkr.ecr.eu-north-1.amazonaws.com/flask-backend
+
+docker run -d --name flask_backend -p 5000:5000  241592945434.dkr.ecr.eu-north-1.amazonaws.com/flask-backend:latest
+docker run -d --name express_frontend -p 3000:3000 -e BACKEND_URL=http://13.60.18.50:5000/api 241592945434.dkr.ecr.eu-north-1.amazonaws.com/express-frontend:latest
 
 

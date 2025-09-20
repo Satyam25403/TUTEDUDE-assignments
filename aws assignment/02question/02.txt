@@ -1,17 +1,8 @@
-sudo apt update
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-sudo apt install unzip
-unzip awscliv2.zip
-sudo ./aws/install
-aws --version
 
-aws ecr get-login-password --region eu-north-1 | \
-  docker login --username AWS --password-stdin 241592945434.dkr.ecr.eu-north-1.amazonaws.com
+COMMANDS USED:
 
-
-
-docker pull 241592945434.dkr.ecr.eu-north-1.amazonaws.com/express-frontend
-docker pull 241592945434.dkr.ecr.eu-north-1.amazonaws.com/flask-backend
-docker network create tutedude-net
-docker run -d --name flask_backend --network tutedude-net -p 5000:5000  241592945434.dkr.ecr.eu-north-1.amazonaws.com/flask-backend:latest
-docker run -d --name express_frontend --network tutedude-net -p 3000:3000 -e BACKEND_URL=http://flask_backend:5000/api 241592945434.dkr.ecr.eu-north-1.amazonaws.com/express-frontend:latest
+git clone https://github.com/Satyam25403/github_tutedude
+cd github_tutedude/frontend
+npm install
+cd ../
+BACKEND_URL=http://51.20.84.161:5000/api node frontend/app.js

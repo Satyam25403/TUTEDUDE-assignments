@@ -106,7 +106,16 @@ aws ecr get-login-password --region eu-north-1 | docker login --username AWS --p
 docker pull 241592945434.dkr.ecr.eu-north-1.amazonaws.com/express-frontend
 docker pull 241592945434.dkr.ecr.eu-north-1.amazonaws.com/flask-backend
 
-docker run -d --name flask_backend -p 5000:5000  241592945434.dkr.ecr.eu-north-1.amazonaws.com/flask-backend:latest
-docker run -d --name express_frontend -p 3000:3000 -e BACKEND_URL=http://13.60.18.50:5000/api 241592945434.dkr.ecr.eu-north-1.amazonaws.com/express-frontend:latest
+docker stop $(docker ps)
+docker rm $(docker ps -aq)
+docker rmi -f $(docker images -aq)
+
+docker run -d --name flask_backend -p 5000:5000 241592945434.dkr.ecr.eu-north-1.amazonaws.com/flask-backend:latest
+docker run -d --name express_frontend -p 3000:3000 -e BACKEND_URL=http://56.228.23.158:5000/api 241592945434.dkr.ecr.eu-north-1.amazonaws.com/express-frontend:latest
+
+//cleanup
+docker stop $(docker ps)
+docker rm $(docker ps -aq)
+docker rmi -f $(docker images -aq)
 
 

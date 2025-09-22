@@ -8,3 +8,5 @@ cd ../
 BACKEND_URL=http://51.20.84.161:5000/api node frontend/app.js
 
 lsof -t -i:3000 | xargs -r kill -9 || true
+
+

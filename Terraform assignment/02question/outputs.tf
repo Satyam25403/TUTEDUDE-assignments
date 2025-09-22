@@ -1,8 +1,9 @@
-# ---------------------
-output "backend_public_ip" {
-  value = aws_instance.backend.public_ip
+output "public_ip" {
+  value       = aws_instance.app.public_ip
+  description = "Public IP address of the EC2 instance"
 }
 
-output "frontend_public_ip" {
-  value = aws_instance.frontend.public_ip
+output "instance_public_dns" {
+  description = "Public DNS"
+  value       = aws_instance.app.public_dns
 }

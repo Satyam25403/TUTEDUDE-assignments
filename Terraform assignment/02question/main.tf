@@ -1,22 +1,25 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+}
+
 provider "aws" {
   region = var.region
 }
 
-# ---------------------
-# Security Group for Backend
-# ---------------------
-resource "aws_security_group" "backend_sg" {
-  name        = "backend-sg"
-  description = "Allow Flask port 5000 and SSH"
-  vpc_id      = data.aws_vpc.default.id
+# default VPC lookup
+data "aws_vpc" "default" {
+  default = true
+}
 
-  ingress {
-    description = "Flask from frontend"
-    from_port   = 5000
-    to_port     = 5000
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] # frontend EC2 can reach backend
-  }
+resource "aws_security_group" "instance_sg" {
+  name        = "tf-flask-express-sg1"
+  description = "Allow SSH, Express(3000)"
+  vpc_id      = data.aws_vpc.default.id
 
   ingress {
     description = "SSH"
@@ -26,38 +29,14 @@ resource "aws_security_group" "backend_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
-
-# ---------------------
-# Security Group for Frontend
-# ---------------------
-resource "aws_security_group" "frontend_sg" {
-  name        = "frontend-sg"
-  description = "Allow Express port 3000 and SSH"
-  vpc_id      = data.aws_vpc.default.id
-
   ingress {
-    description = "Express from internet"
+    description = "Express frontend"
     from_port   = 3000
     to_port     = 3000
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  ingress {
-    description = "SSH"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
   egress {
     from_port   = 0
     to_port     = 0
@@ -66,37 +45,38 @@ resource "aws_security_group" "frontend_sg" {
   }
 }
 
-# ---------------------
-# Backend EC2
-# ---------------------
-resource "aws_instance" "backend" {
+resource "aws_instance" "app" {
   ami           = var.ami_id
   instance_type = var.instance_type
-  key_name      = var.key_name
-  vpc_security_group_ids = [aws_security_group.backend_sg.id]
+  key_name      = var.key_name != "" ? var.key_name : null
+  vpc_security_group_ids = [aws_security_group.instance_sg.id]
 
-  user_data = file("${path.module}/user_data/backend.sh")
+  user_data = <<-EOF
+    #!/bin/bash -xe
+    apt-get update -y
+    apt-get install -y git curl build-essential
+
+    # install Node.js (v18)
+    curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+    apt-get install -y nodejs
+
+    # clone repo
+    cd /home/ubuntu
+    git clone ${var.github_repo_url}
+    cd github_tutedude
+
+    # frontend setup
+    cd frontend
+    touch /home/ubuntu/expresslog.txt
+    chmod 666 /home/ubuntu/expresslog.txt
+
+    sudo npm install --unsafe-perm >> /home/ubuntu/expresslog.txt 2>&1
+
+    BACKEND_URL=http://13.62.98.111:5000/api node app.js>> /home/ubuntu/expresslog.txt 2>&1 &
+EOF
 
   tags = {
-    Name = "Flask-Backend"
-  }
-}
-
-# ---------------------
-# Frontend EC2
-# ---------------------
-resource "aws_instance" "frontend" {
-  ami           = var.ami_id
-  instance_type = var.instance_type
-  key_name      = var.key_name
-  vpc_security_group_ids = [aws_security_group.frontend_sg.id]
-
-  user_data = templatefile("${path.module}/user_data/frontend.sh", {
-    backend_ip = aws_instance.backend.public_ip
-  })
-
-  tags = {
-    Name = "Express-Frontend"
+    Name = "tf-flask-express-instance"
   }
 }
 

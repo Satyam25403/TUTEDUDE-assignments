@@ -1,21 +1,22 @@
 variable "region" {
-  default = "eu-central-1"
+  default = "eu-north-1"
 }
 
 variable "ami_id" {
-  default = "ami-0c55b159cbfafe1f0"
+  description = "AMI ID for the EC2 instance"
+  type        = string
+  default     = "ami-0a716d3f3b16d290c"  
 }
 
 variable "instance_type" {
-  default = "t2.micro"
+  default = "t3.micro"
 }
 
 variable "key_name" {
-  type = string
+  description = "Optional existing AWS key pair for SSH"
+  default     = ""
 }
 
-variable "my_ip_cidr" {
-  description = "Your public IP in CIDR format for SSH access"
-  type        = string
-  default     = "0.0.0.0/0"  # replace with your IP
+variable "github_repo_url" {
+  default = "https://github.com/Satyam25403/github_tutedude"
 }

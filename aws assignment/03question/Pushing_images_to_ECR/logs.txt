@@ -91,7 +91,7 @@ latest: digest: sha256:ea2927a34d4ecf8de93cd7f7ce539b16022d42be1a91f0261c59683ac
 
 
 
-//running images on instance
+//running images on instance:Test
 installing awscliv2 on ubuntu ec2 instance:
 sudo apt update
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
@@ -117,5 +117,8 @@ docker run -d --name express_frontend -p 3000:3000 -e BACKEND_URL=http://56.228.
 docker stop $(docker ps)
 docker rm $(docker ps -aq)
 docker rmi -f $(docker images -aq)
+
+
+
 
 

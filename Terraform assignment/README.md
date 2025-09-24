@@ -8,13 +8,9 @@ This repository contains Terraform configurations to deploy a web application st
 
 - [Architecture](#architecture)
 - [Prerequisites](#prerequisites)
-- [AWS Services Used](#aws-services-used)
 - [Terraform Configuration](#terraform-configuration)
 - [Deployment Steps](#deployment-steps)
-- [Environment Variables](#environment-variables)
-- [Health Checks](#health-checks)
 - [Cleanup](#cleanup)
-- [Notes](#notes)
 
 ---
 
@@ -63,7 +59,7 @@ terraform init
 
 ### Plan the and save the deployment:
 ```bash
-terraform plan out=tfplan
+terraform plan -out=tfplan
 ```
 
 ### Apply the configuration:
